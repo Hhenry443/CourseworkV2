@@ -1,15 +1,33 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+/**
+ * This represents the actual slide that will make up the slideshow.
+ *
+ * A slide does not need an orientation, as they are treated the same
+ * Slides only consist of an ArrayList of tags
+ *
+ */
 public class Slide {
-    ArrayList<String> slideTags = new ArrayList<>();
+    private ArrayList<String> slideTags = new ArrayList<>();
 
-    // Constructor to create the slide object from the tags provided
+    /**
+     * Creates a slide from generic tag list
+     * Used for horizontal photo slides
+     *
+     * @param tags ArrayList of the tags for the slide, from the photo
+     * */
     public Slide(ArrayList<String> tags) {
         slideTags = tags;
     }
 
-    // Constructor to create a slide from two vertical slides
+    /**
+     * Creates a slide from two vertical photos
+     * It merges the two tag lists, without duplication
+     * This assumes that the two given photos are vertical
+     *
+     * @param p1 First Vertical Photo
+     * @param p2 Second Vertical Photo
+     * */
     public Slide(Photo p1, Photo p2) {
         ArrayList<String> p1Tags = p1.getTags();
         ArrayList<String> p2Tags = p2.getTags();
@@ -27,9 +45,21 @@ public class Slide {
         }
     }
 
-    public void outputDetails() {
-        System.out.println("Slide with Tags: " + slideTags.toString());
+    /**
+     * Gets all the tags from the slide
+     * Assumes that the slide has tags attached to it
+     *
+     * @return ArrayList of tags as String object
+     * */
+    public ArrayList<String> getSlideTags() {
+        return slideTags;
     }
 
-
+    /**
+     * Output the slides tags
+     * Assumes that the slide has tags attached to it
+     *  */
+    public void outputDetails() {
+        System.out.println("Slide with Tags: " + getSlideTags().toString());
+    }
 }
