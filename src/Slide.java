@@ -62,4 +62,24 @@ public class Slide {
     public void outputDetails() {
         System.out.println("Slide with Tags: " + getSlideTags().toString());
     }
+
+    public Integer computeInterest(Slide secondSlide) {
+        ArrayList<String> s1Tags = getSlideTags();
+        ArrayList<String> s2Tags = secondSlide.getSlideTags();
+
+        int numberOfTagsInSlide1 = 0;
+        int numberOfTagsInSlide2 = 0;
+        int numberOfTagsInBoth = 0;
+
+        for (String tag : s1Tags) {
+            if (s2Tags.contains(tag)) {
+                numberOfTagsInBoth++;
+            }
+        }
+
+        numberOfTagsInSlide1 = s1Tags.size() - numberOfTagsInBoth;
+        numberOfTagsInSlide2 = s2Tags.size() - numberOfTagsInBoth;
+
+        return Math.min(Math.min(numberOfTagsInSlide1, numberOfTagsInSlide2), numberOfTagsInBoth);
+    }
 }
