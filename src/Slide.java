@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 /**
  * This represents the actual slide that will make up the slideshow.
- *
  * A slide does not need an orientation, as they are treated the same
  * Slides only consist of an ArrayList of tags
  *
