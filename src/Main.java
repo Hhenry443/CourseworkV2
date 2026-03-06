@@ -17,7 +17,7 @@ public class Main {
 
         // Process the photos from a text file.
         // This generates a usable set of photos to generate the slides from.
-        ArrayList<Photo> photos = PG.processPhotos("a_example.txt");
+        ArrayList<Photo> photos = PG.processPhotos("e_shiny_selfies.txt");
 
         // Generate slides from that set of photos.
         ArrayList<Slide> slides = SG.generateSlides(photos);
@@ -46,52 +46,56 @@ public class Main {
             }
         }
 
-        // Output Hashmap
-
-        // Iterate through the HashMap
-        for (Map.Entry<Integer, ArrayList<Slide>> entry : slidesByTagNumber.entrySet()) {
-            System.out.println(entry.getKey() + " -> " + entry.getValue());
-        }
-
         ArrayList<Slide> orderedSlides = new ArrayList<>();
 
         // now we need to loop through each arraylist and find the best order. This will then be stored in a new hashset
         for (Integer key : slidesByTagNumber.keySet()) {
             // Extract the arraylist
             ArrayList<Slide> workingSlides = slidesByTagNumber.get(key);
-            Slide current = workingSlides.removeFirst();
 
-            if (workingSlides.isEmpty()) continue;
-            
-            while (!workingSlides.isEmpty()) {
-                if (workingSlides.size() == 1) {
-                    orderedSlides.add(current);
-                    orderedSlides.add(workingSlides.removeFirst());
-                    break;
-                }
+            if (workingSlides.size() == 1) {
+                orderedSlides.add(workingSlides.removeFirst());
+            }
 
-                Slide bestPartner = workingSlides.get(0);
-                int bestInterest = current.computeInterest(bestPartner);
+            while (workingSlides.size() > 1) {
+                Slide current = workingSlides.get(0);
+                Slide bestPair = null;
+                int bestScore = -1;
 
-                for (Slide otherSlide : workingSlides) {
-                    int interest = current.computeInterest(otherSlide);
-                    if (interest > bestInterest){
-                        bestPartner = otherSlide;
-                        bestInterest = interest;
+                for (int i = 1; i < workingSlides.size(); i++) {
+                    Slide candidate = workingSlides.get(i);
+                    int score = current.computeInterest(candidate);
+
+                    if (score > bestScore) {
+                        bestScore = score;
+                        bestPair = candidate;
                     }
                 }
 
                 orderedSlides.add(current);
-                workingSlides.remove(bestPartner);
-                current = bestPartner;
+                orderedSlides.add(bestPair);
+
+                workingSlides.remove(current);
+                workingSlides.remove(bestPair);
             }
 
-            if (workingSlides.isEmpty()) {
-                orderedSlides.add(current);
+            if (workingSlides.size() == 1) {
+                orderedSlides.add(workingSlides.getLast());
             }
         }
 
-        System.out.println(orderedSlides);
+        for (Slide s : orderedSlides) {
+            s.outputDetails();
+        }
+
+        Integer totalScore = 0;
+
+        for (int i = 0; i < orderedSlides.size() - 1; i++) {
+            totalScore += orderedSlides.get(i)
+                    .computeInterest(orderedSlides.get(i + 1));
+        }
+
+        System.out.println("Total score for slides: " + totalScore);
     }
 
     static void sortSlides(ArrayList<Slide> arr, int n) {
