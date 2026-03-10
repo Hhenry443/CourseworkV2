@@ -6,7 +6,9 @@ public class SlideOrganiser {
         HashMap<Integer, ArrayList<Slide>> slidesByTagNumber = new HashMap<>();
 
         for (Slide s : slides) {
-            int numberOfTags = s.getSlideTags().size();
+            // divide the number of tags by 2, which increases the size of the buckets.
+            // Leads to a low performance score increase.
+            int numberOfTags = s.getSlideTags().size() / 2;
 
             // Check if number of tags already present
             if (slidesByTagNumber.containsKey(numberOfTags)) {
@@ -21,7 +23,7 @@ public class SlideOrganiser {
         return  slidesByTagNumber;
     }
 
-    public ArrayList<Slide> orderSlides(HashMap<Integer, ArrayList<Slide>> slidesByTagNumber) {
+    public ArrayList<Slide> orderSlidesbyTagNumber(HashMap<Integer, ArrayList<Slide>> slidesByTagNumber) {
         ArrayList<Slide> orderedSlides = new ArrayList<>();
 
         // now we need to loop through each arraylist and find the best order. This will then be stored in a new hashset
