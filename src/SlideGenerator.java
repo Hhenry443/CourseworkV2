@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SlideGenerator {
     public ArrayList<Slide> generateSlides(ArrayList<Photo> photos) {
@@ -16,8 +18,8 @@ public class SlideGenerator {
             }
         }
 
-        // simple bubble sort to order the horizontal photos by number of tags
-        bubbleSort(verticalPhotos, verticalPhotos.size());
+        // use built in sort
+        verticalPhotos.sort((a, b) -> a.getTagNumber() - b.getTagNumber());
 
         // now construct the vertical slides, based on the number of tags
         // so photos with few tags are paired with ones with lots of tags.
@@ -30,30 +32,6 @@ public class SlideGenerator {
             slides.add(newSlide);
         }
 
-        return slides;
-    }
-
-    static void bubbleSort(ArrayList<Photo> arr, int n) {
-        int i, j;
-        Photo temp;
-        boolean swapped;
-
-        for (i = 0; i < n - 1; i++) {
-            swapped = false;
-            for (j = 0; j < n - i - 1; j++) {
-                if (arr.get(j).getTagNumber() > arr.get(j + 1).getTagNumber()) {
-                    // swap the two values
-                    temp = arr.get(j);
-                    arr.set(j, arr.get(j + 1));
-                    arr.set(j+1, temp);
-                    swapped = true;
-                }
-            }
-
-            // If no two elements were
-            // swapped by inner loop, then break
-            if (!swapped)
-                break;
-        }
+            return slides;
     }
 }

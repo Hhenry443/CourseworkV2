@@ -1,0 +1,65 @@
+// Tag Group based approach - 100 cap - 10000 threshold - 39s
+// Set A - 2
+// Set B - 205770
+// Set C - 1484
+// Set D - 354353
+// Set E - 322976
+// Total - 884583
+
+// Tag Group based approach - 1000 cap - 10000 threshold - 96s
+// Set A - 2
+// Set B - 205770
+// Set C - 1484
+// Set D - 390915
+// Set E - 375979
+// Total - 974148
+
+// Tag Group based approach - 2500 cap - 10000 threshold - 194s
+// Set A - 2
+// Set B - 205770
+// Set C - 1484
+// Set D - 400730
+// Set E - 392238
+// Total - 1000222
+
+// Tag Group based approach - 5000 cap - 10000 threshold - 366s
+// Set A - 2
+// Set B - 205770
+// Set C - 1484
+// Set D - 409883
+// Set E - 400999
+// Total - 1018136
+
+
+
+// Tag Group based approach - 100 cap - Dynamic threshold - 11s
+// Set A - 2
+// Set B - 205770
+// Set C - 1492
+// Set D - 352898
+// Set E - 319447
+// Total - 879607
+
+// Tag Group based approach - 1000 cap - Dynamic threshold - 72s
+// Set A - 2
+// Set B - 205770
+// Set C - 1484
+// Set D - 390847
+// Set E - 375738
+// Total - 973839
+
+// Tag Group based approach - 2500 cap - Dynamic threshold - 215s
+// Set A - 2
+// Set B - 205770
+// Set C - 1484
+// Set D - 400722
+// Set E - 392236
+// Total - 1000212
+
+// Tag Group based approach - 5000 cap - Dynamic threshold - 343s
+// Set A - 2
+// Set B - 205770
+// Set C - 1484
+// Set D - 409879
+// Set E - 400999
+// Total - 1018132

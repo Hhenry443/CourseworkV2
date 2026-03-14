@@ -1,7 +1,14 @@
 import java.util.ArrayList;
 
 public class PartA {
-    public ArrayList<Slide> generateSlides(String file) {
+
+    String file;
+
+    public PartA(String file) {
+        this.file = file;
+    }
+
+    public ArrayList<Slide> generateSlides() {
         // --- Part A: Slide Creation ---
 
         // We need to create the photos from the text file provided.
@@ -11,11 +18,10 @@ public class PartA {
 
         // Process the photos from a text file.
         // This generates a usable set of photos to generate the slides from.
-        ArrayList<Photo> photos = PG.processPhotos(file);
+        ArrayList<Photo> photos = PG.processPhotos(this.file);
 
         // Generate slides from that set of photos.
-        ArrayList<Slide> slides = SG.generateSlides(photos);
 
-        return slides;
+        return SG.generateSlides(photos);
     }
 }

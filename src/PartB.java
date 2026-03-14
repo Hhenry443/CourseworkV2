@@ -1,33 +1,8 @@
 import java.util.*;
 
 public class PartB {
-
-    // This version of the program works by splitting up the slides into groups based on the number of tags.
-    // The reasoning behind this is that it will negate any interest caps from differing slide numbers
-    // for example, if a slide has 4 tags, and another has 3, there will always be a difference of 1
-    // This would then cap the interest score at 1, which leads to lots of checks that aren't as valuable
-    public Integer orderByNumberOfTags(ArrayList<Slide> slides) {
-        SlideOrganiser SO = new SlideOrganiser();
-        Utils U = new Utils();
-
-        HashMap<Integer, ArrayList<Slide>> slidesByTagNumber = SO.sortSlidesByTagNumber(slides);
-
-        ArrayList<Slide> orderedSlides = SO.orderSlidesbyTagNumber(slidesByTagNumber);
-
-        return U.totalScore(orderedSlides);
-    }
-
-    // slides that share at least one tag are good options for pairs.
-    // maybe ordering based on these groups of shared tags is better than number of tags
-    public Integer orderByTagGroups(ArrayList<Slide> slides) {
-        // first we need to make the tag groups
-        // then we need to pick a random starting slideshow
-        // then, make a big list of candidates of all slides that share at least one tag
-        // find the best one from that
-        // then remove the current slide from all its tag groups, then set the new current slide to the best one.
-
+    public HashMap<String, ArrayList<Slide>> createTagGroups(ArrayList<Slide> slides) {
         HashMap<String, ArrayList<Slide>> tagGroups = new HashMap<>();
-        Utils U = new Utils();
 
         for (Slide s : slides) {
             ArrayList<String> tags = s.getSlideTags();
@@ -43,6 +18,24 @@ public class PartB {
             }
         }
 
+        return tagGroups;
+    }
+
+
+    // slides that share at least one tag are good options for pairs.
+    // maybe ordering based on these groups of shared tags is better than number of tags
+    public Integer orderByTagGroups(ArrayList<Slide> slides, int threshold) {
+        // first we need to make the tag groups
+        // then we need to pick a random starting slideshow
+        // then, make a big list of candidates of all slides that share at least one tag
+        // find the best one from that
+        // then remove the current slide from all its tag groups, then set the new current slide to the best one.
+        Utils U = new Utils();
+
+        HashMap<String, ArrayList<Slide>> tagGroups = this.createTagGroups(slides);
+
+        System.out.println("Created tag groups");
+
         Slide current = slides.removeFirst();
         ArrayList<Slide> ordered = new ArrayList<>();
 
@@ -52,11 +45,7 @@ public class PartB {
 
         int totalSlides = slides.size();
 
-        System.out.println("Slides remaining: " + slides.size());
-
         while (!slides.isEmpty()) {
-
-
             ArrayList<Slide> candidates = new ArrayList<>();
 
             for (String t : current.getSlideTags()) {
@@ -66,12 +55,8 @@ public class PartB {
             Slide best = null;
             int bestScore = -1;
 
-
-
             if (candidates.size() > 10000) {
-                Collections.shuffle(candidates);
-
-                candidates = new ArrayList<>(candidates.subList(0, 5000));
+                candidates = new ArrayList<>(candidates.subList(0, threshold));
             }
 
             for (Slide i : candidates) {
@@ -101,11 +86,11 @@ public class PartB {
 
             iteration++;
 
-            if (iteration % 1000 == 0) {
-                System.out.println(
-                        "Processed: " + iteration + "/" + totalSlides
-                );
-            }
+//            if (iteration % 1000 == 0) {
+//                System.out.println(
+//                        "Processed: " + iteration + "/" + totalSlides
+//                );
+//            }
         }
 
         return U.totalScore(ordered);

@@ -1,58 +1,31 @@
-import java.util.ArrayList;
+import java.time.Duration;
+import java.time.Instant;
 
 public class Main {
     public static void main(String[] args) {
-        // This program is split into two main parts.
-        // Part A - Making the slides from the two photosets
-        // Part B - Ordering the slides based on interest score
-        // A few attempts have been made for part B, as this is where there are the most methods to get a score.
+        String[] files = new String[] {"b_lovely_landscapes.txt", "c_memorable_moments.txt", "d_pet_pictures.txt", "e_shiny_selfies.txt"};
 
-        // Part A
-        PartA PA = new PartA();
+        Controller c1 = new Controller("b_lovely_landscapes.txt", 2500);
+        Controller c2 = new Controller("c_memorable_moments.txt", 2500);
+        Controller c3 = new Controller("d_pet_pictures.txt", 2500);
+        Controller c4 = new Controller("e_shiny_selfies.txt", 2500);
 
-        // String file = "a_example.txt";
-        // String file = "b_lovely_landscapes.txt";
-        // String file = "c_memorable_moments.txt";
-        // String file = "d_pet_pictures.txt";
-        String file = "e_shiny_selfies.txt";
+        Instant start = Instant.now();
 
-        ArrayList<Slide> slides = PA.generateSlides(file);
+        c1.start();
+        c2.start();
+        c3.start();
+        c4.start();
 
-        // Part B
-        PartB PB = new PartB();
+        while (c1.isAlive() || c2.isAlive() || c3.isAlive() || c4.isAlive()) {
+            continue;
+        }
 
-        Integer totalScore = PB.orderByNumberOfTags(slides);
-        System.out.println("Total score for slides (Using the number of tags method): " + totalScore);
+        int finalScore = c1.getFinalScore() + c2.getFinalScore() + c3.getFinalScore() + c4.getFinalScore();
+        System.out.println("Final Score is: " + finalScore);
 
-        // Integer totalScore = PB.orderByTagGroups(slides);
-        // System.out.println("Total score for slides (Using tag groups): " + totalScore);
+        Instant end = Instant.now();
+        Duration timeElapsed = Duration.between(start, end);
+        System.out.println("Time taken: "+ timeElapsed.toSeconds() +" seconds");
     }
 }
-
-// Number of Tags based approach
-// Set A - 2
-// Set B - 40203
-// Set C - 613
-// Set D - 310468
-// Set E -
-
-// Tag Group based approach - 100 cap
-// Set A - 2
-// Set B - 205266
-// Set C - 1460
-// Set D - 379705
-// Set E - 322477
-
-// Tag Group based approach - 1000 cap
-// Set A - 2
-// Set B - 205476
-// Set C - 1463
-// Set D - 404002
-// Set E - 374508
-
-// Tag Group based approach - 5000 cap
-// Set A - 2
-// Set B - 205863
-// Set C - 1476
-// Set D - 410576
-// Set E - 399412
