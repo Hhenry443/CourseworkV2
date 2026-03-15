@@ -24,7 +24,7 @@ public class PartB {
 
     // slides that share at least one tag are good options for pairs.
     // maybe ordering based on these groups of shared tags is better than number of tags
-    public Integer orderByTagGroups(ArrayList<Slide> slides, int threshold) {
+    public int orderByTagGroups(ArrayList<Slide> slides, int threshold) {
         // first we need to make the tag groups
         // then we need to pick a random starting slideshow
         // then, make a big list of candidates of all slides that share at least one tag
@@ -55,7 +55,7 @@ public class PartB {
             Slide best = null;
             int bestScore = -1;
 
-            if (candidates.size() > 10000) {
+            if (candidates.size() > threshold) {
                 candidates = new ArrayList<>(candidates.subList(0, threshold));
             }
 

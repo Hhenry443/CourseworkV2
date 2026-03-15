@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Utils {
-    public Integer totalScore(ArrayList<Slide> orderedSlides) {
+    public int totalScore(ArrayList<Slide> orderedSlides) {
         Integer totalScore = 0;
 
         for (int i = 0; i < orderedSlides.size() - 1; i++) {

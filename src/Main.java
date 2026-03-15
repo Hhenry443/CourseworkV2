@@ -5,10 +5,10 @@ public class Main {
     public static void main(String[] args) {
         String[] files = new String[] {"b_lovely_landscapes.txt", "c_memorable_moments.txt", "d_pet_pictures.txt", "e_shiny_selfies.txt"};
 
-        Controller c1 = new Controller("b_lovely_landscapes.txt", 2500);
-        Controller c2 = new Controller("c_memorable_moments.txt", 2500);
-        Controller c3 = new Controller("d_pet_pictures.txt", 2500);
-        Controller c4 = new Controller("e_shiny_selfies.txt", 2500);
+        Controller c1 = new Controller("b_lovely_landscapes.txt", 100);
+        Controller c2 = new Controller("c_memorable_moments.txt", 100);
+        Controller c3 = new Controller("d_pet_pictures.txt", 100);
+        Controller c4 = new Controller("e_shiny_selfies.txt", 100);
 
         Instant start = Instant.now();
 

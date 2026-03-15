@@ -40,6 +40,14 @@
 // Set E - 319447
 // Total - 879607
 
+// Tag Group based approach - 200 cap - Dynamic threshold - 64s
+// Set A - 2
+// Set B - 205770
+// Set C - 1484
+// Set D - 362462
+// Set E - 338121
+// Total - 907837
+
 // Tag Group based approach - 1000 cap - Dynamic threshold - 72s
 // Set A - 2
 // Set B - 205770
